@@ -10,8 +10,8 @@ import (
 type User struct {
     gorm.Model
     Role string
-    Name string
-    Age uint
+    Name string `gorm:"default:USER"`
+    Age uint `gorm:"default:18"`
     Birthday time.Time
     CreditCard CreditCard
 }
