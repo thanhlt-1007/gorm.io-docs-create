@@ -16,6 +16,20 @@ type User struct {
     CreditCard CreditCard
 }
 
+func (user *User) Println() {
+    fmt.Println("\n---USER---")
+    fmt.Printf("ID: %d\n", user.ID)
+    fmt.Printf("CreatedAt: %v\n", user.CreatedAt)
+    fmt.Printf("UpdatedAt: %v\n", user.UpdatedAt)
+    fmt.Printf("DeletedAt: %v\n", user.DeletedAt)
+    fmt.Printf("Role: %s\n", user.Role)
+    fmt.Printf("Name: %s\n", user.Name)
+    fmt.Printf("Age: %d\n", user.Age)
+    fmt.Printf("Birthday: %v\n", user.Birthday)
+    fmt.Println()
+}
+
+// Hooks
 func (user *User) BeforeSave(db *gorm.DB) error {
     fmt.Println("User BeforeSave")
 
