@@ -1,9 +1,11 @@
 package models
 
 import (
-    "fmt"
-    "time"
-    "gorm.io/gorm"
+	"errors"
+	"fmt"
+	"time"
+
+	"gorm.io/gorm"
 )
 
 type User struct {
@@ -22,6 +24,10 @@ func (user *User) BeforeSave(db *gorm.DB) error {
 
 func (user *User) BeforeCreate(db *gorm.DB) error {
     fmt.Println("User BeforeCreate")
+
+    if user.Role == "Admin" {
+        return errors.New("invalid role")
+    }
 
     return nil
 }

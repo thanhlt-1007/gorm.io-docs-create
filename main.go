@@ -24,6 +24,58 @@ func InitDb() *gorm.DB {
     return db
 }
 
+func CreateAdminUser(db *gorm.DB) {
+    fmt.Println("CreateAdminUser")
+
+    user := models.User {
+        Name: "Jinzhu",
+        Role: "Admin",
+        Age: 18,
+        Birthday: time.Now(),
+    }
+    result := db.Create(&user)
+
+    fmt.Printf("result.Error: %v\n", result.Error)
+    fmt.Printf("result.RowsAffected: %d\n", result.RowsAffected)
+
+    fmt.Printf("ID: %d\n", user.ID)
+    fmt.Printf("CreatedAt: %v\n", user.CreatedAt)
+    fmt.Printf("UpdatedAt: %v\n", user.UpdatedAt)
+    fmt.Printf("DeletedAt: %v\n", user.DeletedAt)
+    fmt.Printf("Role: %s\n", user.Role)
+    fmt.Printf("Name: %s\n", user.Name)
+    fmt.Printf("Age: %d\n", user.Age)
+    fmt.Printf("Birthday: %v\n", user.Birthday)
+    fmt.Println()
+}
+
+func CreateAdminUserSkipHooks(db *gorm.DB) {
+    fmt.Println("CreateAdminUserSkipHooks")
+
+    user := models.User {
+        Name: "Jinzhu",
+        Role: "Admin",
+        Age: 18,
+        Birthday: time.Now(),
+    }
+    result := db.Session(&gorm.Session{
+        SkipHooks: true,
+    }).Create(&user)
+
+    fmt.Printf("result.Error: %v\n", result.Error)
+    fmt.Printf("result.RowsAffected: %d\n", result.RowsAffected)
+
+    fmt.Printf("ID: %d\n", user.ID)
+    fmt.Printf("CreatedAt: %v\n", user.CreatedAt)
+    fmt.Printf("UpdatedAt: %v\n", user.UpdatedAt)
+    fmt.Printf("DeletedAt: %v\n", user.DeletedAt)
+    fmt.Printf("Role: %s\n", user.Role)
+    fmt.Printf("Name: %s\n", user.Name)
+    fmt.Printf("Age: %d\n", user.Age)
+    fmt.Printf("Birthday: %v\n", user.Birthday)
+    fmt.Println()
+}
+
 func CreateUser(db *gorm.DB) {
     fmt.Println("CreateUser")
 
@@ -108,6 +160,8 @@ func CreateInBatchesUsers(db *gorm.DB) {
 
 func main() {
     db := InitDb()
+    CreateAdminUser(db)
+    CreateAdminUserSkipHooks(db)
     CreateUser(db)
     // CreateUsers(db)
     // CreateInBatchesUsers(db)
