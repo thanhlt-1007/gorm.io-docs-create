@@ -1,18 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"time"
-
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
+    "fmt"
+    "gorm.io/driver/sqlite"
+    "gorm.io/gorm"
+    "time"
 )
 
 type User struct {
 	gorm.Model
 	Name string
 	Age uint
-	Brithday time.Time
+	Birthday time.Time
 }
 
 func InitDb() *gorm.DB {
@@ -31,6 +30,27 @@ func InitDb() *gorm.DB {
     return db
 }
 
+func CreateUser(db *gorm.DB) {
+    user := User {
+        Name: "Jinzhu",
+        Age: 18,
+        Birthday: time.Now(),
+    }
+    result := db.Create(&user)
+
+    fmt.Printf("result.Error: %v\n", result.Error)
+    fmt.Printf("result.RowsAffected: %d\n", result.RowsAffected)
+
+    fmt.Printf("ID: %d\n", user.ID)
+    fmt.Printf("CreatedAt: %v\n", user.CreatedAt)
+    fmt.Printf("UpdatedAt: %v\n", user.UpdatedAt)
+    fmt.Printf("DeletedAt: %v\n", user.DeletedAt)
+    fmt.Printf("Name: %s\n", user.Name)
+    fmt.Printf("Age: %d\n", user.Age)
+    fmt.Printf("Birthday: %v\n", user.Birthday)
+}
+
 func main() {
-    InitDb()
+    db := InitDb()
+    CreateUser(db)
 }
