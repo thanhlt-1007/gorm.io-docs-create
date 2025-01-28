@@ -2,17 +2,11 @@ package main
 
 import (
     "fmt"
+    "github.com/thanhlt-1007/gorm.io-docs-create/models"
     "gorm.io/driver/sqlite"
     "gorm.io/gorm"
     "time"
 )
-
-type User struct {
-	gorm.Model
-	Name string
-	Age uint
-	Birthday time.Time
-}
 
 func InitDb() *gorm.DB {
     db, err := gorm.Open(
@@ -25,7 +19,7 @@ func InitDb() *gorm.DB {
         panic(err)
     }
 
-    db.AutoMigrate(&User{})
+    db.AutoMigrate(&models.User{})
 
     return db
 }
@@ -33,7 +27,7 @@ func InitDb() *gorm.DB {
 func CreateUser(db *gorm.DB) {
     fmt.Println("CreateUser")
 
-    user := User {
+    user := models.User {
         Name: "Jinzhu",
         Age: 18,
         Birthday: time.Now(),
@@ -56,7 +50,7 @@ func CreateUser(db *gorm.DB) {
 func CreateUsers(db *gorm.DB) {
     fmt.Println("CreateUsers")
 
-    users := []User {
+    users := []models.User {
         {
             Name: "Jinzhu 1",
         },
@@ -84,7 +78,7 @@ func CreateUsers(db *gorm.DB) {
 func CreateInBatchesUsers(db *gorm.DB) {
     fmt.Println("CreateInBatchesUsers")
 
-    users := []User {
+    users := []models.User {
         {
             Name: "Jinzhu 1",
         },
