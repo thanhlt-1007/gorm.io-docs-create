@@ -8,6 +8,7 @@ import (
 
 type User struct {
     gorm.Model
+    Role string
     Name string
     Age uint
     Birthday time.Time
