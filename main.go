@@ -20,6 +20,7 @@ func InitDb() *gorm.DB {
     }
 
     db.AutoMigrate(&models.User{})
+    db.AutoMigrate(&models.CreditCard{})
 
     return db
 }
@@ -73,6 +74,36 @@ func CreateAdminUserSkipHooks(db *gorm.DB) {
     fmt.Printf("Name: %s\n", user.Name)
     fmt.Printf("Age: %d\n", user.Age)
     fmt.Printf("Birthday: %v\n", user.Birthday)
+    fmt.Println()
+}
+
+func CreateUserWithCreditCard(db *gorm.DB) {
+    fmt.Println("CreateUserWithCreditCard")
+
+    user := models.User {
+        Name: "jinzhu",
+        CreditCard: models.CreditCard {
+            Number: "411111111111",
+        },
+    }
+    result := db.Create(&user)
+
+    fmt.Printf("result.Error: %v\n", result.Error)
+    fmt.Printf("result.RowsAffected: %d\n", result.RowsAffected)
+
+    fmt.Printf("ID: %d\n", user.ID)
+    fmt.Printf("CreatedAt: %v\n", user.CreatedAt)
+    fmt.Printf("UpdatedAt: %v\n", user.UpdatedAt)
+    fmt.Printf("DeletedAt: %v\n", user.DeletedAt)
+    fmt.Printf("Role: %s\n", user.Role)
+    fmt.Printf("Name: %s\n", user.Name)
+    fmt.Printf("Age: %d\n", user.Age)
+    fmt.Printf("Birthday: %v\n", user.Birthday)
+
+    creditCard := user.CreditCard
+    fmt.Printf("CreditCard.ID: %d\n", creditCard.ID)
+    fmt.Printf("CreditCard.UserId: %d\n", creditCard.UserId)
+    fmt.Printf("CreditCard.Number: %s\n", creditCard.Number)
     fmt.Println()
 }
 
@@ -160,9 +191,11 @@ func CreateInBatchesUsers(db *gorm.DB) {
 
 func main() {
     db := InitDb()
-    CreateAdminUser(db)
-    CreateAdminUserSkipHooks(db)
-    CreateUser(db)
+    // CreateAdminUser(db)
+    // CreateAdminUserSkipHooks(db)
+    // CreateUser(db)
     // CreateUsers(db)
     // CreateInBatchesUsers(db)
+
+    CreateUserWithCreditCard(db)
 }

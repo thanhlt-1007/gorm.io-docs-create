@@ -1,11 +1,10 @@
 package models
 
 import (
-	"errors"
-	"fmt"
-	"time"
-
-	"gorm.io/gorm"
+    "errors"
+    "fmt"
+    "gorm.io/gorm"
+    "time"
 )
 
 type User struct {
@@ -14,6 +13,7 @@ type User struct {
     Name string
     Age uint
     Birthday time.Time
+    CreditCard CreditCard
 }
 
 func (user *User) BeforeSave(db *gorm.DB) error {
