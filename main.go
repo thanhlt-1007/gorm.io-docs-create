@@ -31,6 +31,8 @@ func InitDb() *gorm.DB {
 }
 
 func CreateUser(db *gorm.DB) {
+    fmt.Println("CreateUser")
+
     user := User {
         Name: "Jinzhu",
         Age: 18,
@@ -48,9 +50,12 @@ func CreateUser(db *gorm.DB) {
     fmt.Printf("Name: %s\n", user.Name)
     fmt.Printf("Age: %d\n", user.Age)
     fmt.Printf("Birthday: %v\n", user.Birthday)
+    fmt.Println()
 }
 
 func CreateUsers(db *gorm.DB) {
+    fmt.Println("CreateUsers")
+
     users := []User {
         {
             Name: "Jinzhu 1",
@@ -73,9 +78,12 @@ func CreateUsers(db *gorm.DB) {
         fmt.Printf("Age: %d\n", user.Age)
         fmt.Printf("Birthday: %v\n", user.Birthday)
     }
+    fmt.Println()
 }
 
 func CreateInBatchesUsers(db *gorm.DB) {
+    fmt.Println("CreateInBatchesUsers")
+
     users := []User {
         {
             Name: "Jinzhu 1",
@@ -98,6 +106,7 @@ func CreateInBatchesUsers(db *gorm.DB) {
         fmt.Printf("Age: %d\n", user.Age)
         fmt.Printf("Birthday: %v\n", user.Birthday)
     }
+    fmt.Println()
 }
 
 func main() {
