@@ -106,6 +106,6 @@ func CreateInBatchesUsers(db *gorm.DB) {
 func main() {
     db := InitDb()
     CreateUser(db)
-    CreateUsers(db)
-    CreateInBatchesUsers(db)
+    // CreateUsers(db)
+    // CreateInBatchesUsers(db)
 }
